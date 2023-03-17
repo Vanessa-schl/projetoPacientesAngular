@@ -1,0 +1,68 @@
+<body>
+    
+<header>
+  <h1>Registro de pacientes</h1>
+</header>
+
+<main>
+
+  <mat-form-field appearance="fill">
+    <mat-label class="nome">Nome</mat-label>
+    <input matInput id="nome" [(ngModel)]="paciente.nome" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label class="idade">Idade</mat-label>
+    <input matInput id="idade" [(ngModel)]="paciente.idade" required>
+  </mat-form-field>
+ 
+  <div *ngFor="let dependente of paciente.dependentes">
+    <mat-form-field  appearance="fill">
+      <mat-label class="nomeDependente">Nome</mat-label>
+      <input matInput id="nomeDependente" [(ngModel)]="dependente.nome">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label class="idadeDependente">Idade</mat-label>
+      <input matInput id="idadeDependente" [(ngModel)]="dependente.idade" >
+    </mat-form-field>
+  </div>
+
+    <button (click)="salvar()"  [disabled]="!camposPreenchidos()">Registrar paciente</button>
+    <button (click)="addDependente()">Adicionar dependente</button>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let paciente of pacientes">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Nome: {{ paciente.nome }}</mat-panel-title>
+          <mat-panel-description>Idade: {{ paciente.idade }}</mat-panel-description>
+          <button mat-icon-button (click)="excluirPaciente(paciente)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </mat-expansion-panel-header>
+        <p>Dependentes:</p>
+        <br>
+          <li *ngFor="let dependente of paciente.dependentes">Nome: {{ dependente.nome }}, Idade: {{ dependente.idade }}</li>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+    <!-- <div *ngFor="let dependente of paciente.dependentes; let i = index">
+      <button mat-icon-button (click)="excluirDependente(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div> -->
+  
+
+
+
+ 
+ 
+    
+
+
+
+  
+
+</main>
+
+</body>
